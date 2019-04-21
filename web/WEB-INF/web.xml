@@ -24,27 +24,27 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>artist-servlet</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
+        <url-pattern>/rest1/*</url-pattern>
     </servlet-mapping>
-    <!--<servlet>-->
-        <!--<servlet-name>album-servlet</servlet-name>-->
-        <!--<servlet-class>-->
-            <!--com.sun.jersey.spi.container.servlet.ServletContainer-->
-        <!--</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>com.sun.jersey.config.property.packages</param-name>-->
-            <!--<param-value>musiclibrary.rest.album</param-value>-->
-        <!--</init-param>-->
+    <servlet>
+        <servlet-name>album-servlet</servlet-name>
+        <servlet-class>
+            com.sun.jersey.spi.container.servlet.ServletContainer
+        </servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>musiclibrary.rest.album</param-value>
+        </init-param>
 
-        <!--<init-param>-->
-            <!--<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>-->
-            <!--<param-value>true</param-value>-->
-        <!--</init-param>-->
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
 
-        <!--&lt;!&ndash;<load-on-startup>1</load-on-startup>&ndash;&gt;-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>album-servlet</servlet-name>-->
-        <!--<url-pattern>/rest/albums/*</url-pattern>-->
-    <!--</servlet-mapping>-->
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>album-servlet</servlet-name>
+        <url-pattern>/rest2/*</url-pattern>
+    </servlet-mapping>
 </web-app>

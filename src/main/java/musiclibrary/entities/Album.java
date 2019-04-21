@@ -1,15 +1,26 @@
 package musiclibrary.entities;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.mongodb.morphia.annotations.Id;
 import java.io.Serializable;
 
 import static musiclibrary.dbworks.dbconstants.DBconstants.COLLECTION_ALBUMS;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @org.mongodb.morphia.annotations.Entity(COLLECTION_ALBUMS)
 public class Album extends Entity implements Serializable {
     @Id
-    private final int id;
-    private final String name;
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
 
     public Album(int id, String name) {
         this.id = id;

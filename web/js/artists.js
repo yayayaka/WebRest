@@ -3,7 +3,7 @@ fillTable();
 
 function fillTable() {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "http://localhost:8080/rest/artists/get/all", true);
+    xmlhttp.open("GET", "http://localhost:8080/rest1/artists/get/all", true);
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 &&
             xmlhttp.status == 200){
@@ -26,7 +26,7 @@ function addClick() {
         alert('Input the name');
     } else {
         var posthttp = new XMLHttpRequest();
-        posthttp.open("POST", "http://localhost:8080/rest/artists/add/", true);
+        posthttp.open("POST", "http://localhost:8080/rest1/artists/add/", true);
         posthttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
         posthttp.onreadystatechange = function() {
             if (posthttp.readyState == 4 &&
@@ -43,7 +43,7 @@ function addClick() {
 
 function delClick(id) {
     delhttp = new XMLHttpRequest();
-    delhttp.open("DELETE", "http://localhost:8080/rest/artists/del/" + id, true);
+    delhttp.open("DELETE", "http://localhost:8080/rest1/artists/del/" + id, true);
     delhttp.onreadystatechange = function () {
         fillTable();
     };

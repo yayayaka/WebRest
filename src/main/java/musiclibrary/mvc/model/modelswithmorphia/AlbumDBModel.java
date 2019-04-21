@@ -15,7 +15,7 @@ import java.util.List;
 
 import static musiclibrary.dbworks.dbconstants.DBconstants.DBNAME;
 
-public class AlbumDBModel extends Model {
+public class AlbumDBModel extends Model<Album> {
     Morphia morphia;
     MongoClient mongoClient;
     Datastore ds;
@@ -31,8 +31,7 @@ public class AlbumDBModel extends Model {
     }
 
     public void put(int id, Album album) {
-        Album newAlbum = new Album(id, album.getName());
-        ds.save(newAlbum);
+        put(new Album(getNextId(), album.getName()));
     }
 
     public boolean remove(int id) {
@@ -64,6 +63,11 @@ public class AlbumDBModel extends Model {
     public List<Album> getItems(String albumName) {
         Query<Album> query = ds.createQuery(Album.class)
                 .field("name").equal(albumName);
+        return query.asList();
+    }
+
+    public List<Album> getItems() {
+        Query<Album> query = ds.createQuery(Album.class);
         return query.asList();
     }
 
