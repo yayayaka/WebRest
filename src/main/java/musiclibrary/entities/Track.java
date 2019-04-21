@@ -1,24 +1,45 @@
 package musiclibrary.entities;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 import static musiclibrary.dbworks.dbconstants.DBconstants.COLLECTION_TRACKS;
 
 @org.mongodb.morphia.annotations.Entity(COLLECTION_TRACKS)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Track extends Entity implements Serializable {
     @Id
-    private final int id;
-    private final String name;
+    private int id;
+    private String name;
     @Reference
-    private final Artist artist;
-    private final double trackLenght;
+    private Artist artist;
+    private double trackLenght;
     @Embedded
-    private final Genre genre;
+    private Genre genre;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
+    public void setTrackLenght(double trackLenght) {
+        this.trackLenght = trackLenght;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 
     private Track() {
         id = -1;

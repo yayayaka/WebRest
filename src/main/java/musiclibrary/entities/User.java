@@ -1,6 +1,7 @@
 package musiclibrary.entities;
 
 import com.google.common.collect.ImmutableList;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
@@ -11,12 +12,25 @@ import java.util.Objects;
 import static musiclibrary.dbworks.dbconstants.DBconstants.COLLECTION_USERS;
 
 @org.mongodb.morphia.annotations.Entity(COLLECTION_USERS)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends Entity implements Serializable {
     @Id
-    private final int id;
-    private final String name;
+    private int id;
+    private String name;
     @Reference
-    private final ImmutableList<TrackList> trackLists;
+    private ImmutableList<TrackList> trackLists;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTrackLists(ImmutableList<TrackList> trackLists) {
+        this.trackLists = trackLists;
+    }
 
     public User(int id, String name, List<TrackList> trackLists) {
         this.id = id;

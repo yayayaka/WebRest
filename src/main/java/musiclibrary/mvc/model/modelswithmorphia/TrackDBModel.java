@@ -2,6 +2,7 @@ package musiclibrary.mvc.model.modelswithmorphia;
 
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
+import musiclibrary.entities.Album;
 import musiclibrary.entities.Artist;
 import musiclibrary.entities.Track;
 import musiclibrary.mvc.model.Model;
@@ -17,7 +18,7 @@ import java.util.List;
 
 import static musiclibrary.dbworks.dbconstants.DBconstants.DBNAME;
 
-public class TrackDBModel extends Model {
+public class TrackDBModel extends Model<Track> {
     Morphia morphia;
     MongoClient mongoClient;
     Datastore ds;
@@ -31,6 +32,12 @@ public class TrackDBModel extends Model {
     public void put(Track track) {
         ds.save(track);
     }
+
+    public void put(int id, Track track) {
+        put(new Track(getNextId(), track.getName(), track.getArtist(),
+                track.getTrackLenght(), track.getGenre()));
+    }
+
 
     public boolean remove(int id) {
         Query<Track> query = ds.createQuery(Track.class)
@@ -58,6 +65,11 @@ public class TrackDBModel extends Model {
         Query<Track> query = ds.createQuery(Track.class)
                 .field("_id").equal(id);
         return query.get();
+    }
+
+    public List<Track> getItems() {
+        Query<Track> query = ds.createQuery(Track.class);
+        return query.asList();
     }
 
     public List<Track> getItems(String trackName) {
