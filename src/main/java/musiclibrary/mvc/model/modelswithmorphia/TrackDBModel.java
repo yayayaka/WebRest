@@ -2,13 +2,9 @@ package musiclibrary.mvc.model.modelswithmorphia;
 
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
-import musiclibrary.entities.Album;
-import musiclibrary.entities.Artist;
 import musiclibrary.entities.Track;
 import musiclibrary.mvc.model.Model;
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Key;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
@@ -35,7 +31,7 @@ public class TrackDBModel extends Model<Track> {
 
     public void put(int id, Track track) {
         put(new Track(getNextId(), track.getName(), track.getArtist(),
-                track.getTrackLenght(), track.getGenre()));
+                track.getTrackLength(), track.getGenre()));
     }
 
 
@@ -84,7 +80,7 @@ public class TrackDBModel extends Model<Track> {
         UpdateOperations<Track> updateOperation = ds.createUpdateOperations(Track.class)
                 .set("name", track.getName())
                 .set("artist", track.getArtist())
-                .set("trackLenght", track.getTrackLenght())
+                .set("trackLenght", track.getTrackLength())
                 .set("genre", track.getGenre());
         ds.update(query, updateOperation);
     }

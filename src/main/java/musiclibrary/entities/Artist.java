@@ -3,6 +3,7 @@ package musiclibrary.entities;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,7 +17,6 @@ public class Artist extends Entity
     @Id
     private int id;
 
-//    @JsonIgnore
     public void setId(int id) {
         this.id = id;
     }

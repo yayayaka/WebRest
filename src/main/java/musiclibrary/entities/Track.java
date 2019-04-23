@@ -17,7 +17,7 @@ public class Track extends Entity implements Serializable {
     private String name;
     @Reference
     private Artist artist;
-    private double trackLenght;
+    private double trackLength;
     @Embedded
     private Genre genre;
 
@@ -33,8 +33,8 @@ public class Track extends Entity implements Serializable {
         this.artist = artist;
     }
 
-    public void setTrackLenght(double trackLenght) {
-        this.trackLenght = trackLenght;
+    public void setTrackLength(double trackLength) {
+        this.trackLength = trackLength;
     }
 
     public void setGenre(Genre genre) {
@@ -45,7 +45,7 @@ public class Track extends Entity implements Serializable {
         id = -1;
         name = null;
         artist = null;
-        trackLenght = -1.0;
+        trackLength = -1.0;
         genre = Genre.none;
     }
 
@@ -56,7 +56,7 @@ public class Track extends Entity implements Serializable {
         this.artist = artist;
         if (trackLength <= 0)
             throw new NumberFormatException("Недопустимое значение длины трека");
-        this.trackLenght = trackLength;
+        this.trackLength = trackLength;
         this.genre = genre;
     }
 
@@ -68,8 +68,8 @@ public class Track extends Entity implements Serializable {
         return artist;
     }
 
-    public double getTrackLenght() {
-        return trackLenght;
+    public double getTrackLength() {
+        return trackLength;
     }
 
     public Genre getGenre() {
@@ -86,7 +86,7 @@ public class Track extends Entity implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", artist=" + artist +
-                ", trackLenght=" + trackLenght +
+                ", trackLength=" + trackLength +
                 ", genre=" + genre +
                 '}';
     }
@@ -101,7 +101,7 @@ public class Track extends Entity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, artist, trackLenght, genre);
+        return Objects.hash(id, name, artist, trackLength, genre);
     }
 }
 

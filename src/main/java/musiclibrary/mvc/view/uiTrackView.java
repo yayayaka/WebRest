@@ -1,6 +1,5 @@
 package musiclibrary.mvc.view;
 
-import musiclibrary.entities.Album;
 import musiclibrary.entities.Entity;
 import musiclibrary.entities.Track;
 import musiclibrary.mvc.controller.GenericController;
