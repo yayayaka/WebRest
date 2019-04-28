@@ -50,7 +50,7 @@ public class TrackList extends Entity implements Serializable {
         return id;
     }
 
-    public Album getGetAlbum() {
+    public Album getAlbum() {
         return album;
     }
 

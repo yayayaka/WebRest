@@ -15,45 +15,45 @@ function fillTable() {
             trackListTable.innerHTML = '';
             makeTableHeader(trackListTable);
             // makeFormCreationNewTrack(trackListTable);
-            // fillTrackTable(trackListTable);
-            // addTableBottom(trackListTable);
+            fillTrackListTable(trackListTable);
+            addTableBottom(trackListTable);
         }
     }
     xmlhttp.send(null);
 }
 
-function addClick() {
-    var trackListName = document.getElementById('name').value;
-    var chooseArtist = document.getElementById('chooseArtist');
-    var trackLength = document.getElementById('trackLength').value;
-    var chooseGenre = document.getElementById('chooseGenre');
-    if (trackListName === 'Name' || trackName === '') {
-        alert('Input the name!');
-    } else if (chooseArtist.value == '-1') {
-        alert('Select Artist!');
-    } else if (!isDigitsInput(trackLength)) {
-        alert('TrackLength: Digits only');
-    } else if (chooseGenre.value == '-1') {
-        alert('Select Genre!');
-    } else {
-        var posthttp = new XMLHttpRequest();
-        posthttp.open("POST", "http://localhost:8080/rest4/tracklists/add/", true);
-        posthttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        posthttp.onreadystatechange = function() {
-            if (posthttp.readyState == 4 &&
-                posthttp.status == 200){
-                fillTable();
-            }
-        }
-        var track = { name : trackName,
-            artist : { id : chooseArtist.value,
-                name : chooseArtist.options[chooseArtist.value].innerText },
-            trackLength : trackLength,
-            genre : chooseGenre.value };
-        var jsonData = JSON.stringify(track);
-        posthttp.send(jsonData);
-    }
-}
+// function addClick() {
+//     var trackListName = document.getElementById('name').value;
+//     var chooseArtist = document.getElementById('chooseArtist');
+//     var trackLength = document.getElementById('trackLength').value;
+//     var chooseGenre = document.getElementById('chooseGenre');
+//     if (trackListName === 'Name' || trackName === '') {
+//         alert('Input the name!');
+//     } else if (chooseArtist.value == '-1') {
+//         alert('Select Artist!');
+//     } else if (!isDigitsInput(trackLength)) {
+//         alert('TrackLength: Digits only');
+//     } else if (chooseGenre.value == '-1') {
+//         alert('Select Genre!');
+//     } else {
+//         var posthttp = new XMLHttpRequest();
+//         posthttp.open("POST", "http://localhost:8080/rest4/tracklists/add/", true);
+//         posthttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+//         posthttp.onreadystatechange = function() {
+//             if (posthttp.readyState == 4 &&
+//                 posthttp.status == 200){
+//                 fillTable();
+//             }
+//         }
+//         var track = { name : trackName,
+//             artist : { id : chooseArtist.value,
+//                 name : chooseArtist.options[chooseArtist.value].innerText },
+//             trackLength : trackLength,
+//             genre : chooseGenre.value };
+//         var jsonData = JSON.stringify(track);
+//         posthttp.send(jsonData);
+//     }
+// }
 
 function isDigitsInput(input) {
     if(!input.match(/^\d+(.\d+)?$/))
@@ -78,7 +78,7 @@ function makeTableHeader(trackListTable) {
     trackListTable.appendChild(tableHeader);
     var tr = document.createElement("tr");
     tr.innerHTML = "<td class='th'>Id</td>" +
-        "<td class='th'>Name</td>" +
+        // "<td class='th'>Name</td>" +
         "<td class='th'>Album</td>" +
         "<td class='th'>Show tracks</td>" +
         "<td class='th'>&nbsp;</td>";
@@ -88,25 +88,25 @@ function makeTableHeader(trackListTable) {
     trackListTable.appendChild(tr);
 }
 
-function blurInputName() {
-    if(document.getElementById('name').value == '')
-        document.getElementById('name').value = 'Name';
-}
-
-function blurInputTrackLenght() {
-    if(document.getElementById('trackLength').value == '')
-        document.getElementById('trackLength').value = 'TrackLength';
-}
-
-function focusInputName() {
-    if (document.getElementById('name').value == 'Name')
-        document.getElementById('name').value = '';
-}
-
-function focusInputTrackLength() {
-    if (document.getElementById('trackLength').value == 'TrackLength')
-        document.getElementById('trackLength').value = '';
-}
+// function blurInputName() {
+//     if(document.getElementById('name').value == '')
+//         document.getElementById('name').value = 'Name';
+// }
+//
+// function blurInputTrackLenght() {
+//     if(document.getElementById('trackLength').value == '')
+//         document.getElementById('trackLength').value = 'TrackLength';
+// }
+//
+// function focusInputName() {
+//     if (document.getElementById('name').value == 'Name')
+//         document.getElementById('name').value = '';
+// }
+//
+// function focusInputTrackLength() {
+//     if (document.getElementById('trackLength').value == 'TrackLength')
+//         document.getElementById('trackLength').value = '';
+// }
 
 // function inputEnterPressed(e) {
 //     if (e.keyCode == 13) {
@@ -158,7 +158,7 @@ function initAlbumSelect() {
     xhrAlbum.send(null);
 }
 
-// function fillTrackTable(trackListTable) {
+// function fillTrackListTable(trackListTable) {
 //     for (var pointer = 0; pointer < tracks.length; pointer++) {
 //         var nextTr = document.createElement("tr");
 //         nextTr.setAttribute('name', tracks[pointer].id)
@@ -207,6 +207,7 @@ function addNew() {
     trackListTable.appendChild(trAdd);
     initAlbumSelect();
     getAllTracks();
+
 }
 
 function createNew() {
@@ -214,7 +215,7 @@ function createNew() {
     var checkBoxes = document.getElementsByTagName("input");
     var ids = [];
     for (pointer = checkBoxes.length - 1; pointer >= 0; pointer--) {
-        if (checkBoxes[pointer].checked && checkBoxes[pointer].id.match("[0-9]"))
+        if (checkBoxes[pointer].checked && checkBoxes[pointer].id.match("[0-9]+"))
             ids.push({ id : checkBoxes[pointer].id });
     }
     if (selectAlbum.value == -1) {
@@ -236,16 +237,17 @@ function createNew() {
             trackListResponse.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             trackListResponse.onreadystatechange = function () {
                 if (trackListResponse.status == 200 && trackListResponse.readyState == 4) {
+                    alert("Added successfully!");
+                    trackListTable.innerText = '';
+                    fillTable();
                 }
             };
             var trackList = { album : { id : selectAlbum.value,
                     name : selectAlbum.options[selectAlbum.options.selectedIndex].innerText }, tracks : tracks };
             trackList = JSON.stringify(trackList);
-            alert(trackList);
             trackListResponse.send(trackList);
         }
     };
-    alert(JSON.stringify(ids));
     trackResponse.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     trackResponse.send(JSON.stringify(ids));
 }
@@ -268,16 +270,17 @@ function getAllTracks() {
 }
 
 function fillTrackTable(tracks) {
+    // alert(JSON.stringify(tracks));
     var trackListTable = document.getElementById('trackListTable');
     for (var pointer = 0; pointer < tracks.length; pointer++) {
-        var tdCheck = document.createElement("td");
-        tdCheck.setAttribute("class", "td");
+        var nextTr = document.createElement("tr");
+        nextTr.setAttribute('name', tracks[pointer].id);
         var nextCheckBox = document.createElement("input");
         nextCheckBox.setAttribute("type", "checkbox");
         nextCheckBox.setAttribute("id", tracks[pointer].id);
+        var tdCheck = document.createElement("td");
+        tdCheck.setAttribute("class", "td");
         tdCheck.appendChild(nextCheckBox);
-        var nextTr = document.createElement("tr");
-        nextTr.setAttribute('name', tracks[pointer].id);
         var nextId = document.createElement("td");
         nextId.setAttribute("class", "td");
         var nextName = document.createElement("td");
@@ -299,7 +302,44 @@ function fillTrackTable(tracks) {
         nextTr.appendChild(nextArtist);
         nextTr.appendChild(nextTrackLength);
         nextTr.appendChild(nextGenre);
-        var trackListTable = document.getElementById('trackListTable');
+        // var trackListTable = document.getElementById('trackListTable');
+        trackListTable.appendChild(nextTr);
+    }
+}
+
+function fillTrackListTable(trackListTable) {
+    // var trackLists = null;
+    // var trackListRequest = new XMLHttpRequest();
+    // trackListRequest.open("GET", "http://localhost:8080/rest4/tracklists/get/all",true);
+    // trackListRequest.onreadystatechange = function () {
+    //     if (trackListRequest.status == 200 && trackListRequest.readyState == 4) {
+    //         trackLists = trackListRequest.responseText;
+    //         trackLists = JSON.parse(trackLists);
+    //
+    //     }
+    // };
+    // trackListRequest.send(null);
+
+    for (var pointer = 0; pointer < trackLists.length; pointer++) {
+        var nextTr = document.createElement("tr");
+        nextTr.setAttribute('name', trackLists[pointer].id)
+        var nextId = document.createElement("td");
+        nextId.setAttribute("class", "td");
+        var nextAlbum = document.createElement("td");
+        nextAlbum.setAttribute("class", "td");
+        var showTracksTd = document.createElement("td");
+        showTracksTd.setAttribute("class", "td");
+        showTracksTd.innerHTML = "<a onclick='showTracksClick(" + trackLists[pointer].id + ")'>Show tracks</a>";
+        var delTrackListTd = document.createElement("td");
+        delTrackListTd.setAttribute("class", "td");
+        delTrackListTd.innerHTML = "<a onclick='delClick(" + trackLists[pointer].id + ")'>Delete</a>";
+        nextId.innerText = trackLists[pointer].id;
+        // alert(JSON.stringify(trackLists[pointer]));
+        nextAlbum.innerText = trackLists[pointer].album.name;
+        nextTr.appendChild(nextId);
+        nextTr.appendChild(nextAlbum);
+        nextTr.appendChild(showTracksTd);
+        nextTr.appendChild(delTrackListTd);
         trackListTable.appendChild(nextTr);
     }
 }

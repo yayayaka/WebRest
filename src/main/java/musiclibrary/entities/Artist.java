@@ -46,7 +46,6 @@ public class Artist extends Entity
 
     @Override
     public String toString() {
-//        return "Artist [id=" + id + ", name=" + name + "]";
         return "{ " +
                 "\"id\" : \"" + id +
                 "\", \"name\" : \"" + name + "\" }";

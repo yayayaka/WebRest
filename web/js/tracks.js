@@ -32,7 +32,7 @@ function addClick() {
     } else if (chooseArtist.value == '-1') {
         alert('Select Artist!');
     } else if (!isDigitsInput(trackLength)) {
-        alert('TrackLength: Digits only');
+        alert('TrackLength: Digits only, use pattern: 00.00');
     } else if (chooseGenre.value == '-1') {
         alert('Select Genre!');
     } else {
@@ -57,7 +57,7 @@ function addClick() {
 }
 
 function isDigitsInput(input) {
-    if(!input.match(/^\d+(.\d+)?$/))
+    if(!input.match(/^\d{1,2}.[0-5][0-9]$/))//(/^\d+(.\d+)?$/))
         return false;
     return true;
 }

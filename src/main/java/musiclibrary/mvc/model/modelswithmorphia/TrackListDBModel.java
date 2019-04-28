@@ -30,7 +30,7 @@ public class TrackListDBModel extends Model<TrackList> {
     }
 
     public void put(int id, TrackList trackList) {
-        put(new TrackList(getNextId(), trackList.getGetAlbum(), trackList.getTracks()));
+        put(new TrackList(getNextId(), trackList.getAlbum(), trackList.getTracks()));
     }
 
 
@@ -77,7 +77,7 @@ public class TrackListDBModel extends Model<TrackList> {
         Query<TrackList> query = ds.createQuery(TrackList.class)
                 .field("_id").equal(trackList.getId());
         UpdateOperations<TrackList> updateOperation = ds.createUpdateOperations(TrackList.class)
-                .set("album", trackList.getGetAlbum())
+                .set("album", trackList.getAlbum())
                 .set("tracks", trackList.getTracks());
         ds.update(query, updateOperation);
     }
@@ -165,7 +165,7 @@ public class TrackListDBModel extends Model<TrackList> {
 //        Query<TrackList> query = ds.createQuery(TrackList.class)
 //                .field("_id").equal(trackList.getId());
 //        UpdateOperations<TrackList> updateOperation = ds.createUpdateOperations(TrackList.class)
-//                .set("album", trackList.getGetAlbum())
+//                .set("album", trackList.getAlbum())
 //                .set("tracks", trackList.getTracks());
 //        ds.update(query, updateOperation);
 //    }
