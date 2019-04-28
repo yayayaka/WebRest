@@ -58,6 +58,17 @@ td.th {
 	text-align: center;
 }
 
+td.add {
+	color: #F56433;
+	text-shadow: 0 1px 1px #2D2020;
+	padding: 5px;
+	background: #a1f850;
+	border-style: solid;
+	border-width: 0 1px 1px 0;
+	border-color: white;
+	text-align: center;
+}
+
 td.td-bottom {
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;

@@ -31,7 +31,6 @@ function addClick() {
         posthttp.onreadystatechange = function() {
             if (posthttp.readyState == 4 &&
                 posthttp.status == 200){
-                // alert('ready state = ' + posthttp.readyState + ', status = ' + posthttp.status);
                 fillTable();
             }
         }

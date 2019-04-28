@@ -2,7 +2,7 @@ package musiclibrary.mvc.model.modelswithmorphia;
 
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
-import musiclibrary.entities.Album;
+import musiclibrary.entities.User;
 import musiclibrary.mvc.model.Model;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -14,75 +14,77 @@ import java.util.List;
 
 import static musiclibrary.dbworks.dbconstants.DBconstants.DBNAME;
 
-public class AlbumDBModel extends Model<Album> {
+public class UserDBModel extends Model<User> {
     Morphia morphia;
     MongoClient mongoClient;
     Datastore ds;
 
-    public AlbumDBModel() {
+    public UserDBModel() {
         morphia = new Morphia();
         mongoClient = new MongoClient();
         ds = morphia.createDatastore(mongoClient, DBNAME);
     }
 
-    public void put(Album album) {
-        ds.save(album);
+    public void put(User user) {
+        ds.save(user);
     }
 
-    public void put(int id, Album album) {
-        put(new Album(getNextId(), album.getName()));
+    public void put(int id, User user) {
+        put(new User(getNextId(), user.getName(), user.getTrackLists()));
     }
+
 
     public boolean remove(int id) {
-        Query<Album> query = ds.createQuery(Album.class)
+        Query<User> query = ds.createQuery(User.class)
                 .field("_id").equal(id);
         WriteResult result = ds.delete(query);
         return result.wasAcknowledged();
     }
 
     public boolean remove(String name) {
-        Query<Album> query = ds.createQuery(Album.class)
+        Query<User> query = ds.createQuery(User.class)
                 .field("name").equal(name);
         WriteResult result = ds.delete(query);
         return result.wasAcknowledged();
     }
 
-    public Album getItem(String albumName){
-        Query<Album> query = ds.createQuery(Album.class)
-                .field("name").equal(albumName);
+    public User getItem(String userName){
+        Query<User> query = ds.createQuery(User.class)
+                .field("name").equal(userName);
         return query.get();
     }
 
-    public Album getItem(int id){
-        Query<Album> query = ds.createQuery(Album.class)
+    public User getItem(int id){
+        Query<User> query = ds.createQuery(User.class)
                 .field("_id").equal(id);
         return query.get();
     }
 
-    public List<Album> getItems(String albumName) {
-        Query<Album> query = ds.createQuery(Album.class)
-                .field("name").equal(albumName);
+    public List<User> getItems() {
+        Query<User> query = ds.createQuery(User.class);
         return query.asList();
     }
 
-    public List<Album> getItems() {
-        Query<Album> query = ds.createQuery(Album.class);
+    public List<User> getItems(String userName) {
+        Query<User> query = ds.createQuery(User.class)
+                .field("name").equal(userName);
         return query.asList();
     }
 
-    public void update(Album album) {
-        Query<Album> query = ds.createQuery(Album.class)
-                .field("_id").equal(album.getId());
-        UpdateOperations<Album> updateOperation = ds.createUpdateOperations(Album.class)
-                .set("name", album.getName());
+    public void update(User user) {
+        Query<User> query = ds.createQuery(User.class)
+                .field("_id").equal(user.getId());
+        UpdateOperations<User> updateOperation = ds.createUpdateOperations(User.class)
+                .set("name", user.getName())
+                .set("trackLists", user.getTrackLists());
         ds.update(query, updateOperation);
     }
 
     public int getNextId() {
-        Query<Album> query = ds.createQuery(Album.class);
+        Query<User> query = ds.createQuery(User.class);
         if (query.count() > 0) {
             FindOptions findOptions = new FindOptions().limit(1);
-            return ds.createQuery(Album.class)
+            return ds.createQuery(User.class)
                     .order("-_id").get(findOptions).getId() + 1;
         }
         return 0;

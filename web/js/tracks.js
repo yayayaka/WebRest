@@ -45,9 +45,10 @@ function addClick() {
                 fillTable();
             }
         }
+        // selectAlbum.options[selectAlbum.options.selectedIndex].innerText },
         var track = { name : trackName,
             artist : { id : chooseArtist.value,
-                name : chooseArtist.options[chooseArtist.value].innerText },
+                name : chooseArtist.options[chooseArtist.options.selectedIndex].innerText },
             trackLength : trackLength,
             genre : chooseGenre.value };
         var jsonData = JSON.stringify(track);

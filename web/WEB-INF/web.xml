@@ -71,6 +71,50 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>tracklist-servlet</servlet-name>
+        <servlet-class>
+            com.sun.jersey.spi.container.servlet.ServletContainer
+        </servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>musiclibrary.rest.tracklist</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+
+        <load-on-startup>4</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tracklist-servlet</servlet-name>
+        <url-pattern>/rest4/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>user-servlet</servlet-name>
+        <servlet-class>
+            com.sun.jersey.spi.container.servlet.ServletContainer
+        </servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>musiclibrary.rest.user</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+
+        <load-on-startup>5</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>user-servlet</servlet-name>
+        <url-pattern>/rest5/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>genre-servlet</servlet-name>
         <servlet-class>
             com.sun.jersey.spi.container.servlet.ServletContainer

@@ -63,6 +63,10 @@ public abstract class GenericController<T extends Entity>{
 
     }
 
+    public List<T> getByIds(int[] ids) {
+        return null;
+    }
+
     public Model<T> getContainer() {
         return container;
     }

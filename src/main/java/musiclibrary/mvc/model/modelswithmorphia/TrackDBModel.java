@@ -10,6 +10,7 @@ import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static musiclibrary.dbworks.dbconstants.DBconstants.DBNAME;
@@ -61,6 +62,16 @@ public class TrackDBModel extends Model<Track> {
         Query<Track> query = ds.createQuery(Track.class)
                 .field("_id").equal(id);
         return query.get();
+    }
+
+    public List<Track> getByIds(int[] ids) {
+        List<Track> returnTracks = new ArrayList<Track>();
+        for (int id : ids) {
+            Query<Track> query = ds.createQuery(Track.class)
+                    .field("_id").equal(ids);
+            returnTracks.add(query.get());
+        }
+        return returnTracks;
     }
 
     public List<Track> getItems() {

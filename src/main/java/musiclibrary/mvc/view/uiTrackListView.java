@@ -2,14 +2,15 @@ package musiclibrary.mvc.view;
 
 import musiclibrary.entities.Entity;
 import musiclibrary.entities.Track;
+import musiclibrary.entities.TrackList;
 import musiclibrary.mvc.controller.GenericController;
 
 import java.util.List;
 
-public class uiTrackView {
+public class uiTrackListView {
     private GenericController controller;
 
-    public uiTrackView(GenericController controller) {
+    public uiTrackListView(GenericController controller) {
         this.controller = controller;
     }
 
@@ -25,15 +26,11 @@ public class uiTrackView {
         controller.replace(entity);
     }
 
-    public Track get(int id) {
-        return (Track) controller.get(id);
+    public TrackList get(int id) {
+        return (TrackList) controller.get(id);
     }
 
-    public List<Track> getByIds(int[] ids) {
-        return (List<Track>) controller.getByIds(ids);
-    }
-
-    public List<Track> getAll() {
+    public List<TrackList> getAll() {
         return controller.getAll();
     }
 }

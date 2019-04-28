@@ -2,6 +2,7 @@ package musiclibrary.mvc.model;
 
 import com.google.inject.Singleton;
 import musiclibrary.entities.Entity;
+import musiclibrary.entities.Track;
 import musiclibrary.mvc.view.Listener;
 import sun.reflect.misc.FieldUtil;
 
@@ -66,6 +67,10 @@ public class Model<T extends Entity> implements Serializable {
     }
 
     public List<T> getItems() {
+        return null;
+    }
+
+    public List<Track> getByIds(int[] ids) {
         return null;
     }
 
