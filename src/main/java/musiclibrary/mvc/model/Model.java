@@ -70,7 +70,7 @@ public class Model<T extends Entity> implements Serializable {
         return null;
     }
 
-    public List<Track> getByIds(int[] ids) {
+    public List<T> getByIds(int[] ids) {
         return null;
     }
 

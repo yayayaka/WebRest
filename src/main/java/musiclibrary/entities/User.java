@@ -18,7 +18,7 @@ public class User extends Entity implements Serializable {
     private int id;
     private String name;
     @Reference
-    private ImmutableList<TrackList> trackLists;
+    private List<TrackList> trackLists;
 
     public void setId(int id) {
         this.id = id;
@@ -53,7 +53,7 @@ public class User extends Entity implements Serializable {
     public TrackList getTrackList(int index) {
         return trackLists.get(index);
     }
-    public ImmutableList<TrackList> getTrackLists() {
+    public List<TrackList> getTrackLists() {
         return trackLists;
     }
 

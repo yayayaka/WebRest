@@ -14,44 +14,43 @@ import static musiclibrary.dbworks.dbconstants.DBconstants.COLLECTION_TRACKLIST;
 
 @org.mongodb.morphia.annotations.Entity(COLLECTION_TRACKLIST)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TrackList extends Entity implements Serializable {
+public class TrackList extends TrackCollection implements Serializable {
     @Id
     private int id;
-    @Reference
-    private Album album;
+    private String name;
     @Reference
     private List<Track> tracks;
 
-    public void setId(int id) {
-        this.id = id;
+    public String getName() {
+        return name;
     }
 
-    public void setAlbum(Album album) {
-        this.album = album;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setTracks(List<Track> tracks) {
         this.tracks = tracks;
     }
 
-    public TrackList(int id, Album album, List<Track> tracks) {
+    public TrackList(int id, String name, List<Track> tracks) {
         this.id = id;
-        this.album = album;
+        this.name = name;
         this.tracks = ImmutableList.copyOf(tracks);
     }
 
     private TrackList() {
         id = -1;
-        album = null;
+        name = null;
         tracks = null;
     }
 
     public int getId() {
         return id;
-    }
-
-    public Album getAlbum() {
-        return album;
     }
 
     public  List<Track> getTracks() {
@@ -62,7 +61,7 @@ public class TrackList extends Entity implements Serializable {
     public String toString() {
         return "TrackList{" +
                 "id=" + id +
-                ", album=" + album +
+                ", name=" + name +
                 ", tracks=" + tracks +
                 '}';
     }
@@ -77,6 +76,6 @@ public class TrackList extends Entity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, album, tracks);
+        return Objects.hash(id, name, tracks);
     }
 }

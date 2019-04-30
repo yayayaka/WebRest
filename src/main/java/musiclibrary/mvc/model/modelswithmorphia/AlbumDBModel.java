@@ -30,7 +30,7 @@ public class AlbumDBModel extends Model<Album> {
     }
 
     public void put(int id, Album album) {
-        put(new Album(getNextId(), album.getName()));
+        put(new Album(getNextId(), album.getName(), album.getArtist(), album.getTracks()));
     }
 
     public boolean remove(int id) {
