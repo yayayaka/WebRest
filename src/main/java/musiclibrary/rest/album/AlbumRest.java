@@ -3,7 +3,7 @@ package musiclibrary.rest.album;
 import musiclibrary.entities.Album;
 import musiclibrary.mvc.controller.AlbumController;
 import musiclibrary.mvc.model.modelswithmorphia.AlbumDBModel;
-import musiclibrary.mvc.view.uiAlbumView;
+import musiclibrary.mvc.view.uiAlbumFacade;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -11,10 +11,10 @@ import java.util.List;
 
 @Path("/albums")
 public class AlbumRest {
-    private uiAlbumView view;
+    private uiAlbumFacade view;
 
     public AlbumRest() {
-        view = new uiAlbumView(new AlbumController(new AlbumDBModel()));
+        view = new uiAlbumFacade(new AlbumController(new AlbumDBModel()));
     }
 
     @GET

@@ -1,24 +1,22 @@
 package musiclibrary.rest.track;
 
-import musiclibrary.entities.Entity;
 import musiclibrary.entities.Track;
 import musiclibrary.mvc.controller.TrackController;
 import musiclibrary.mvc.model.modelswithmorphia.TrackDBModel;
-import musiclibrary.mvc.view.uiTrackView;
+import musiclibrary.mvc.view.uiTrackFacade;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
 @Path("/tracks")
 public class TrackRest {
-    private uiTrackView view;
+    private uiTrackFacade view;
 
     public TrackRest() {
-        view = new uiTrackView(new TrackController(new TrackDBModel()));
+        view = new uiTrackFacade(new TrackController(new TrackDBModel()));
     }
 
     @GET

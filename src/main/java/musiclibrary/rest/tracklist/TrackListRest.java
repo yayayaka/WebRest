@@ -1,13 +1,9 @@
 package musiclibrary.rest.tracklist;
 
-import musiclibrary.entities.Track;
 import musiclibrary.entities.TrackList;
-import musiclibrary.mvc.controller.TrackController;
 import musiclibrary.mvc.controller.TrackListController;
-import musiclibrary.mvc.model.modelswithmorphia.TrackDBModel;
 import musiclibrary.mvc.model.modelswithmorphia.TrackListDBModel;
-import musiclibrary.mvc.view.uiTrackListView;
-import musiclibrary.mvc.view.uiTrackView;
+import musiclibrary.mvc.view.uiTrackListFacade;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,10 +12,10 @@ import java.util.List;
 
 @Path("/tracklists")
 public class TrackListRest {
-    private uiTrackListView view;
+    private uiTrackListFacade view;
 
     public TrackListRest() {
-        view = new uiTrackListView(new TrackListController(new TrackListDBModel()));
+        view = new uiTrackListFacade(new TrackListController(new TrackListDBModel()));
     }
 
     @GET

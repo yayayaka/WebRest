@@ -1,16 +1,14 @@
 package musiclibrary.mvc.view;
 
+import musiclibrary.entities.Album;
 import musiclibrary.entities.Entity;
-import musiclibrary.entities.Track;
-import musiclibrary.entities.User;
 import musiclibrary.mvc.controller.GenericController;
-
 import java.util.List;
 
-public class uiUserView {
+public class uiAlbumFacade {
     private GenericController controller;
 
-    public uiUserView(GenericController controller) {
+    public uiAlbumFacade(GenericController controller) {
         this.controller = controller;
     }
 
@@ -26,11 +24,11 @@ public class uiUserView {
         controller.replace(entity);
     }
 
-    public User get(int id) {
-        return (User) controller.get(id);
+    public Album get(int id) {
+        return (Album) controller.get(id);
     }
 
-    public List<User> getAll() {
+    public List<Album> getAll() {
         return controller.getAll();
     }
 }

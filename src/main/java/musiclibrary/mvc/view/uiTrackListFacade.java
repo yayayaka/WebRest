@@ -7,10 +7,10 @@ import musiclibrary.mvc.controller.GenericController;
 
 import java.util.List;
 
-public class uiTrackListView {
+public class uiTrackListFacade {
     private GenericController controller;
 
-    public uiTrackListView(GenericController controller) {
+    public uiTrackListFacade(GenericController controller) {
         this.controller = controller;
     }
 

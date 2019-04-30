@@ -3,7 +3,7 @@ package musiclibrary.rest;
 import musiclibrary.entities.Artist;
 import musiclibrary.mvc.controller.ArtistController;
 import musiclibrary.mvc.model.modelswithmorphia.ArtistDBModel;
-import musiclibrary.mvc.view.uiArtistView;
+import musiclibrary.mvc.view.uiArtistFacade;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -11,10 +11,10 @@ import java.util.List;
 
 @Path("/artists")
 public class ArtistRest {
-    private uiArtistView view;
+    private uiArtistFacade view;
 
     public ArtistRest() {
-        view = new uiArtistView(new ArtistController(new ArtistDBModel()));
+        view = new uiArtistFacade(new ArtistController(new ArtistDBModel()));
     }
 
     @GET

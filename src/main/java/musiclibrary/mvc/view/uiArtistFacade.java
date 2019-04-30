@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class uiArtistView {
+public class uiArtistFacade {
     private GenericController controller;
 
-    public uiArtistView(GenericController controller) {
+    public uiArtistFacade(GenericController controller) {
         this.controller = controller;
     }
 

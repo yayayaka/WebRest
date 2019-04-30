@@ -1,13 +1,9 @@
 package musiclibrary.rest.user;
 
-import musiclibrary.entities.Track;
 import musiclibrary.entities.User;
-import musiclibrary.mvc.controller.TrackController;
 import musiclibrary.mvc.controller.UserController;
-import musiclibrary.mvc.model.modelswithmorphia.TrackDBModel;
 import musiclibrary.mvc.model.modelswithmorphia.UserDBModel;
-import musiclibrary.mvc.view.uiTrackView;
-import musiclibrary.mvc.view.uiUserView;
+import musiclibrary.mvc.view.uiUserFacade;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,10 +12,10 @@ import java.util.List;
 
 @Path("/users")
 public class UserRest {
-    private uiUserView view;
+    private uiUserFacade view;
 
     public UserRest() {
-        view = new uiUserView(new UserController(new UserDBModel()));
+        view = new uiUserFacade(new UserController(new UserDBModel()));
     }
 
     @GET
