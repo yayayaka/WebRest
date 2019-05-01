@@ -2,7 +2,7 @@ package musiclibrary.mvc.model.modelswithmorphia;
 
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
-import musiclibrary.entities.Track;
+import musiclibrary.entities.*;
 import musiclibrary.mvc.model.Model;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -39,8 +39,35 @@ public class TrackDBModel extends Model<Track> {
     public boolean remove(int id) {
         Query<Track> query = ds.createQuery(Track.class)
                 .field("_id").equal(id);
+        Track track = query.get();
+
+//        Query<Album> albumCascadeQuery = ds.createQuery(Album.class);
+//        List<Album> albumList = albumCascadeQuery.asList();
+//        for (Album album : albumList) {
+//            List<Track> tracks = album.getTracks();
+//            boolean boo = true;
+//            while (boo) {
+//                boo = tracks.remove(track);
+//            }
+//        }
+
+        trackCascadeDelete(Album.class, track);
+        trackCascadeDelete(TrackList.class, track);
+
         WriteResult result = ds.delete(query);
         return result.wasAcknowledged();
+    }
+
+    public <T extends TrackCollection> void trackCascadeDelete(Class<T> trackCollectionClass, Track track) {
+        Query<T> albumCascadeQuery = ds.createQuery(trackCollectionClass);
+        List<T> albumList = albumCascadeQuery.asList();
+        for (TrackCollection album : albumList) {
+            List<Track> tracks = album.getTracks();
+            boolean boo = true;
+            while (boo) {
+                boo = tracks.remove(track);
+            }
+        }
     }
 
     public boolean remove(String name) {

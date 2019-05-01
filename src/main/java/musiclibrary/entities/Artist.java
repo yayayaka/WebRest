@@ -16,6 +16,7 @@ public class Artist extends Entity
         implements Serializable {
     @Id
     private int id;
+    private String name;
 
     public void setId(int id) {
         this.id = id;
@@ -25,7 +26,6 @@ public class Artist extends Entity
         this.name = name;
     }
 
-    private String name;
 
     public Artist(int id, String name) {
         this.id = id;

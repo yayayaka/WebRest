@@ -3,6 +3,7 @@ package musiclibrary.mvc.model.modelswithmorphia;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
 import musiclibrary.entities.TrackList;
+import musiclibrary.entities.User;
 import musiclibrary.mvc.model.Model;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -37,10 +38,24 @@ public class TrackListDBModel extends Model<TrackList> {
     public boolean remove(int id) {
         Query<TrackList> query = ds.createQuery(TrackList.class)
                 .field("_id").equal(id);
+        TrackList trackList = query.get();
+        cascadeTrackListDelete(trackList);
         WriteResult result = ds.delete(query);
         return result.wasAcknowledged();
     }
 
+    public void cascadeTrackListDelete(TrackList trackList) {
+        Query<User> userCascadeQuery = ds.createQuery(User.class);
+        List<User> userList = userCascadeQuery.asList();
+        for (User user : userList) {
+            List<TrackList> trackLists = user.getTrackLists();
+            boolean boo = true;
+            while (boo) {
+                boo = trackLists.remove(trackList);
+            }
+        }
+    }
+    
     public TrackList getItem(int id){
         Query<TrackList> query = ds.createQuery(TrackList.class)
                 .field("_id").equal(id);
