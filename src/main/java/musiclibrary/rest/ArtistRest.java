@@ -20,8 +20,11 @@ public class ArtistRest {
     @GET
     @Path("/get/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Artist> getAllArtistsInJSON() {
-        return view.getAll();
+    public Response getAllArtistsInJson() {
+        return Response.status(200)
+                .entity(view.getAll())
+//                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
     @POST
@@ -30,17 +33,40 @@ public class ArtistRest {
     public Response consumeJSON(Artist artist) {
         view.add(artist);
         String output = artist.toString();
-        return Response.status(200).entity(output).build();
+        return Response.status(200)
+                .entity(output)
+//                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
+
+//    @OPTIONS
+//    @Path("/add")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response consumeJSON1(Artist artist) {
+//        view.add(artist);
+//        String output = artist.toString();
+//        return Response.status(200)
+//                .header("Access-Control-Allow-Origin", "*")
+//                .build();
+//    }
 
     @DELETE
     @Path("/del/{id}")
     public Response delArtist(@PathParam("id") String id) {
         try {
             view.remove(Integer.parseInt(id));
-            return Response.status(200).build();
+            return Response
+                    .status(200)
+//                    .header("Access-Control-Allow-Origin", "*")
+//                    .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+//                    .header("Access-Control-Allow-Credentials", "true")
+//                    .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                    .build();
         } catch (NumberFormatException e) {
-            return Response.status(404).build();
+            return Response
+                    .status(404)
+//                    .header("Access-Control-Allow-Origin", "*")
+                    .build();
         }
     }
 }

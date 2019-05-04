@@ -21,8 +21,15 @@ public class UserRest {
     @GET
     @Path("/get/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<User> getAllUsersInJSON() {
-        return view.getAll();
+//    public List<User> getAllUsersInJSON() {
+//        return view.getAll();
+//    }
+    public Response getAllUsersInJSON() {
+        return Response
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .entity(view.getAll())
+                .build();
     }
 
     @POST

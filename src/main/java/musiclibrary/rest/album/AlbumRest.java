@@ -20,8 +20,15 @@ public class AlbumRest {
     @GET
     @Path("/get/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Album> getAllArtistsInJSON() {
-        return view.getAll();
+//    public List<Album> getAllArtistsInJSON() {
+//        return view.getAll();
+//    }
+    public Response getAllArtistsInJSON() {
+        return Response
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .entity(view.getAll())
+                .build();
     }
 
     @POST

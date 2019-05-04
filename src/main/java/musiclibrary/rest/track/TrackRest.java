@@ -22,8 +22,12 @@ public class TrackRest {
     @GET
     @Path("/get/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Track> getAllTracksInJSON() {
-        return view.getAll();
+    public Response getAllTracksInJSON() {
+        return Response
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .entity(view.getAll())
+                .build();
     }
 
     @POST

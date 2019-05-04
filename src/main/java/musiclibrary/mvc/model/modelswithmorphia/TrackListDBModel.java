@@ -39,7 +39,7 @@ public class TrackListDBModel extends Model<TrackList> {
         Query<TrackList> query = ds.createQuery(TrackList.class)
                 .field("_id").equal(id);
         TrackList trackList = query.get();
-        cascadeTrackListDelete(trackList);
+//        cascadeTrackListDelete(trackList); ??????
         WriteResult result = ds.delete(query);
         return result.wasAcknowledged();
     }
@@ -55,7 +55,7 @@ public class TrackListDBModel extends Model<TrackList> {
             }
         }
     }
-    
+
     public TrackList getItem(int id){
         Query<TrackList> query = ds.createQuery(TrackList.class)
                 .field("_id").equal(id);
